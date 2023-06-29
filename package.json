@@ -1,0 +1,24 @@
+﻿{
+  "name": "cz.xprees.runtime-anchors",
+  "version": "1.0.0",
+  "displayName": "Runtime Anchors",
+  "description": "This package provides a way to create anchors in runtime.",
+  "unity": "2021.3",
+  "unityRelease": "16f1",
+  "licensesUrl": "http://www.wtfpl.net/txt/copying/",
+  "category": "Core",
+  "dependencies": {
+    "cz.xprees.core": "1.0.0",
+    "cz.xprees.editor-tools": "1.0.0"
+  },
+  "keywords": [
+    "Anchors",
+    "ScriptableObjects",
+    "Multi-Scenes"
+  ],
+  "author": {
+    "name": "xprees",
+    "email": "xprees.developer@gmail.com",
+    "url": "https://github.com/xprees"
+  }
+}

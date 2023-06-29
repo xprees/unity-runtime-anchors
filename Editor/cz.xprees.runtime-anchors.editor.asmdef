@@ -1,0 +1,18 @@
+{
+  "name": "cz.xprees.runtime-anchors.editor",
+  "rootNamespace": "Xprees.RuntimeAnchors",
+  "references": [
+    "GUID:653fae70c7574e09a1b05c4d822b5eea"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
