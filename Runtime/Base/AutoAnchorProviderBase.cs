@@ -28,6 +28,8 @@ namespace Xprees.RuntimeAnchors.Base
 
         private void OnValidate()
         {
+            // Check that the GameObject is present in the scene and not a prefab
+            if (gameObject.scene.rootCount == 0) return;
             if (anchor == null) Debug.LogWarning($"Anchor on {name} has no {nameof(anchor)} set.");
         }
     }
