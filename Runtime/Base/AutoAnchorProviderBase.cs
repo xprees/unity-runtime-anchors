@@ -6,6 +6,10 @@ namespace Xprees.RuntimeAnchors.Base
     {
         public RuntimeAnchorBase<T> anchor;
 
+        [Header("Manual Reference - Optional")]
+        [Tooltip("This will override the automatic reference. Not required.")]
+        [SerializeField] private T manualReference;
+
         private void Start() => ProvideAnchor();
 
         private void OnEnable() => ProvideAnchor();
@@ -16,14 +20,15 @@ namespace Xprees.RuntimeAnchors.Base
             anchor.Unset();
         }
 
-        protected abstract T GetAnchorComponent();
+        protected abstract T GetAutomaticallyAnchorComponent();
 
         private void ProvideAnchor()
         {
             if (anchor == null) return;
             if (anchor.isSet) return;
 
-            anchor.Provide(GetAnchorComponent());
+            var value = manualReference != null ? manualReference : GetAutomaticallyAnchorComponent();
+            anchor.Provide(GetAutomaticallyAnchorComponent());
         }
 
         private void OnValidate()

@@ -5,6 +5,6 @@ namespace Xprees.RuntimeAnchors.AutoProviders
 {
     public class AutoTransformAnchorProvider : AutoAnchorProviderBase<Transform>
     {
-        protected override Transform GetAnchorComponent() => transform;
+        protected override Transform GetAutomaticallyAnchorComponent() => transform;
     }
 }

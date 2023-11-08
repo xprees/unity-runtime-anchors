@@ -5,6 +5,6 @@ namespace Xprees.RuntimeAnchors.AutoProviders
 {
     public class AutoGameObjectAnchorProvider : AutoAnchorProviderBase<GameObject>
     {
-        protected override GameObject GetAnchorComponent() => gameObject;
+        protected override GameObject GetAutomaticallyAnchorComponent() => gameObject;
     }
 }

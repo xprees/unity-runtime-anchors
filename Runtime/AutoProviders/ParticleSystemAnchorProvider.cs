@@ -5,6 +5,6 @@ namespace Xprees.RuntimeAnchors.AutoProviders
 {
     public class ParticleSystemAnchorProvider : AutoAnchorProviderBase<ParticleSystem>
     {
-        protected override ParticleSystem GetAnchorComponent() => GetComponent<ParticleSystem>();
+        protected override ParticleSystem GetAutomaticallyAnchorComponent() => GetComponent<ParticleSystem>();
     }
 }
