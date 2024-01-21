@@ -28,7 +28,7 @@ namespace Xprees.RuntimeAnchors.Base
             if (anchor.isSet) return;
 
             var value = manualReference != null ? manualReference : GetAutomaticallyAnchorComponent();
-            anchor.Provide(GetAutomaticallyAnchorComponent());
+            anchor.Provide(value);
         }
 
         private void OnValidate()
