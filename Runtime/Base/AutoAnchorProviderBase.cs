@@ -4,17 +4,17 @@ namespace Xprees.RuntimeAnchors.Base
 {
     public abstract class AutoAnchorProviderBase<T> : MonoBehaviour where T : Object
     {
-        public RuntimeAnchorBase<T> anchor;
+        [SerializeField] protected RuntimeAnchorBase<T> anchor;
 
         [Header("Manual Reference - Optional")]
         [Tooltip("This will override the automatic reference. Not required.")]
-        [SerializeField] private T manualReference;
+        [SerializeField] protected T manualReference;
 
-        private void Start() => ProvideAnchor();
+        protected virtual void Start() => ProvideAnchor();
 
-        private void OnEnable() => ProvideAnchor();
+        protected virtual void OnEnable() => ProvideAnchor();
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             if (anchor == null) return;
             anchor.Unset();
@@ -22,7 +22,7 @@ namespace Xprees.RuntimeAnchors.Base
 
         protected abstract T GetAutomaticallyAnchorComponent();
 
-        private void ProvideAnchor()
+        protected void ProvideAnchor()
         {
             if (anchor == null) return;
             if (anchor.isSet) return;
