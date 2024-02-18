@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using Xprees.Core;
-using Xprees.EditorTools.Attributes.ReadOnlyAttribute;
+using Xprees.EditorTools.Attributes.ReadOnly;
 
 namespace Xprees.RuntimeAnchors.Base
 {
