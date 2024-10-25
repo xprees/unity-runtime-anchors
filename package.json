@@ -25,6 +25,7 @@
     "url": "https://github.com/xprees/unity-runtime-anchors/issues"
   },
   "repository": {
-    "url": "https://github.com/xprees/unity-runtime-anchors"
+    "type": "git",
+    "url": "https://github.com/xprees/unity-runtime-anchors.git"
   }
 }
