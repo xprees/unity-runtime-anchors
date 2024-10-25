@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
 

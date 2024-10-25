@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 using Xprees.Core;
 using Xprees.EditorTools.Attributes.ReadOnly;

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Xprees.RuntimeAnchors.Base;
 
 namespace Xprees.RuntimeAnchors.AutoProviders
