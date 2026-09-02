@@ -5,7 +5,7 @@ using Xprees.EditorTools.Attributes.ReadOnly;
 
 namespace Xprees.RuntimeAnchors.Base
 {
-    public class RuntimeAnchorBase<T> : DescriptionBaseSO where T : Object
+    public class RuntimeAnchorBase<T> : DescriptionBaseSO, IRuntimeStateOwner where T : Object
     {
         public UnityAction onAnchorProvided;
 
@@ -34,8 +34,14 @@ namespace Xprees.RuntimeAnchors.Base
             isSet = false;
         }
 
+        public void ClearTransientState()
+        {
+            Unset();
+            onAnchorProvided = null;
+        }
+
         private void OnDisable() => ResetState();
 
-        public override void ResetState() => Unset();
+        public override void ResetState() => ClearTransientState();
     }
 }
