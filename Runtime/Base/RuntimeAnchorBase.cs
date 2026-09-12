@@ -5,6 +5,7 @@ using Xprees.EditorTools.Attributes.ReadOnly;
 
 namespace Xprees.RuntimeAnchors.Base
 {
+    [ResetOnPlayMode(PlayModeResetTiming.ExitPlayMode)]
     public class RuntimeAnchorBase<T> : DescriptionBaseSO, IRuntimeStateOwner where T : Object
     {
         public UnityAction onAnchorProvided;
@@ -39,9 +40,5 @@ namespace Xprees.RuntimeAnchors.Base
             Unset();
             onAnchorProvided = null;
         }
-
-        private void OnDisable() => ResetState();
-
-        public override void ResetState() => ClearTransientState();
     }
 }
