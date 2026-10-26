@@ -11,15 +11,27 @@ namespace Xprees.RuntimeAnchors.Base.Reference
         public T inlinedValue;
         public RuntimeAnchorBase<T> anchor;
 
-        public event UnityAction<T> OnValueChanged;
+        private UnityAction<T> _onValueChanged;
+
+        /// Raised when the value is set, or when the anchor gets provided (anchor mode).
+        /// The anchor is hooked on subscribe, not in the constructor: Unity deserializes the fields only after the constructor runs.
+        public event UnityAction<T> OnValueChanged
+        {
+            add
+            {
+                _onValueChanged += value;
+                HookAnchor();
+            }
+            remove
+            {
+                _onValueChanged -= value;
+                if (_onValueChanged == null) UnhookAnchor();
+            }
+        }
 
         public AnchorReferenceBase()
         {
-            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            if (!useInlined && anchor != null) anchor.onAnchorProvided += OnAnchorProvided;
         }
-
-        private void OnAnchorProvided() => OnValueChanged?.Invoke(anchor.Value);
 
         public AnchorReferenceBase(T value)
         {
@@ -29,24 +41,39 @@ namespace Xprees.RuntimeAnchors.Base.Reference
 
         public T Value
         {
-            get => useInlined ? inlinedValue : anchor.Value;
+            get => useInlined ? inlinedValue : anchor ? anchor.Value : null;
             set
             {
                 if (!useInlined)
                 {
+                    // Provide raises onAnchorProvided -> OnAnchorProvided -> OnValueChanged
                     anchor.Provide(value);
-                }
-                else
-                {
-                    inlinedValue = value;
+                    return;
                 }
 
+                inlinedValue = value;
                 OnOnValueChanged(value);
             }
         }
 
         public static implicit operator T(AnchorReferenceBase<T> reference) => reference?.Value;
 
-        protected virtual void OnOnValueChanged(T value) => OnValueChanged?.Invoke(value);
+        protected virtual void OnOnValueChanged(T value) => _onValueChanged?.Invoke(value);
+
+        // Remove first so subscribing twice (or after the anchor cleared its listeners) never doubles the callback.
+        private void HookAnchor()
+        {
+            if (useInlined || !anchor) return;
+
+            anchor.onAnchorProvided -= OnAnchorProvided;
+            anchor.onAnchorProvided += OnAnchorProvided;
+        }
+
+        private void UnhookAnchor()
+        {
+            if (anchor) anchor.onAnchorProvided -= OnAnchorProvided;
+        }
+
+        private void OnAnchorProvided() => OnOnValueChanged(anchor.Value);
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Xprees.RuntimeAnchors.Base
 {
@@ -10,13 +11,35 @@ namespace Xprees.RuntimeAnchors.Base
         [Tooltip("This will override the automatic reference. Not required.")]
         [SerializeField] protected T manualReference;
 
-        protected virtual void Start() => ProvideAnchor();
+        [Header("Settings")]
+        [Tooltip("Provides anchor during Awake() if set to true")]
+        [SerializeField] protected bool provideInAwake = false;
 
-        protected virtual void OnEnable() => ProvideAnchor();
+        [Tooltip("Provides anchor OnEnable() if set to true")]
+        [SerializeField] protected bool provideOnEnable = true;
+
+        [Tooltip("Provides anchor during Start() if set to true")]
+        [SerializeField] protected bool provideInStart = true;
+
+        protected void Awake()
+        {
+            if (provideInAwake) ProvideAnchor();
+        }
+
+        protected virtual void OnEnable()
+        {
+            if (provideOnEnable) ProvideAnchor();
+        }
+
+        protected virtual void Start()
+        {
+            if (provideInStart) ProvideAnchor();
+        }
 
         protected virtual void OnDisable()
         {
-            if (anchor == null) return;
+            if (!anchor) return;
+
             anchor.Unset();
         }
 
@@ -24,7 +47,7 @@ namespace Xprees.RuntimeAnchors.Base
 
         protected void ProvideAnchor()
         {
-            if (anchor == null) return;
+            if (!anchor) return;
             if (anchor.isSet) return;
 
             var value = manualReference != null ? manualReference : GetAutomaticallyAnchorComponent();
